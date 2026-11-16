@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-flavor="mocha">
+<html lang="en" data-theme="mocha">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -17,12 +17,11 @@
     <meta property="og:type" content="website" />
     <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
     <script>
-      // Apply the saved Catppuccin flavor before first paint.
+      // Apply the saved theme before first paint ('flavor' is the old storage key).
       try {
-        var flavor = localStorage.getItem('flavor')
-        if (['mocha', 'macchiato', 'frappe', 'latte'].indexOf(flavor) !== -1) {
-          document.documentElement.dataset.flavor = flavor
-        }
+        var theme = localStorage.getItem('theme') || localStorage.getItem('flavor')
+        var known = ['mocha', 'macchiato', 'frappe', 'latte', 'gruvbox-dark', 'gruvbox-light', 'tokyo-night']
+        if (known.indexOf(theme) !== -1) document.documentElement.dataset.theme = theme
       } catch (error) {}
     </script>
   </head>

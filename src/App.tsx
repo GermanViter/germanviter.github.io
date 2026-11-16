@@ -3,7 +3,7 @@ import { HashRouter, Route, Routes, useLocation, useNavigate } from 'react-route
 import { Bar } from './components/Bar'
 import { Footer } from './components/Footer'
 import { WORKSPACES } from './data/nav'
-import { useFlavor } from './hooks/useFlavor'
+import { useTheme } from './hooks/useTheme'
 import { useHotkeys } from './hooks/useHotkeys'
 import { Experience } from './pages/Experience'
 import { Home } from './pages/Home'
@@ -18,7 +18,7 @@ const TITLES: Record<string, string> = {
 }
 
 function Shell() {
-  const { flavor, cycle } = useFlavor()
+  const { theme, setTheme, cycle } = useTheme()
   const navigate = useNavigate()
   const { pathname } = useLocation()
 
@@ -45,8 +45,8 @@ function Shell() {
       >
         Skip to content
       </a>
-      <PixelField flavor={flavor} />
-      <Bar flavor={flavor} onCycleFlavor={cycle} />
+      <PixelField theme={theme} />
+      <Bar theme={theme} onSelectTheme={setTheme} />
       <main className="page" id="main" tabIndex={-1}>
         <Routes>
           <Route path="/" element={<Home />} />

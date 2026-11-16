@@ -1,10 +1,12 @@
 /*
- * Catppuccin — https://catppuccin.com/palette
- * Each flavor defines the same 26 colors. Mocha is the default.
+ * Every theme fills the same 26 slots, named after the Catppuccin palette
+ * (https://catppuccin.com/palette). Catppuccin Mocha is the default.
+ * Themes that are not Catppuccin map their own colors onto those names; see
+ * the Gruvbox and Tokyo Night blocks further down.
  */
 
 :root,
-:root[data-flavor='mocha'] {
+:root[data-theme='mocha'] {
   color-scheme: dark;
   --rosewater: #f5e0dc;
   --flamingo: #f2cdcd;
@@ -34,7 +36,7 @@
   --crust: #11111b;
 }
 
-:root[data-flavor='macchiato'] {
+:root[data-theme='macchiato'] {
   color-scheme: dark;
   --rosewater: #f4dbd6;
   --flamingo: #f0c6c6;
@@ -64,7 +66,7 @@
   --crust: #181926;
 }
 
-:root[data-flavor='frappe'] {
+:root[data-theme='frappe'] {
   color-scheme: dark;
   --rosewater: #f2d5cf;
   --flamingo: #eebebe;
@@ -94,7 +96,7 @@
   --crust: #232634;
 }
 
-:root[data-flavor='latte'] {
+:root[data-theme='latte'] {
   color-scheme: light;
   --rosewater: #dc8a78;
   --flamingo: #dd7878;
@@ -124,6 +126,105 @@
   --crust: #dce0e8;
 }
 
+/*
+ * Gruvbox — https://github.com/morhetz/gruvbox
+ * Neutrals are the dark0…light4 ramp. Dark mode uses the "bright" hues, light
+ * mode the "faded" ones, as the original does. Gruvbox has no pink, sky or
+ * sapphire, so those slots take the nearest neutral_* color.
+ */
+:root[data-theme='gruvbox-dark'] {
+  color-scheme: dark;
+  --rosewater: #d5c4a1;
+  --flamingo: #d65d0e;
+  --pink: #b16286;
+  --mauve: #d3869b;
+  --red: #fb4934;
+  --maroon: #cc241d;
+  --peach: #fe8019;
+  --yellow: #fabd2f;
+  --green: #b8bb26;
+  --teal: #8ec07c;
+  --sky: #83a598;
+  --sapphire: #458588;
+  --blue: #83a598;
+  --lavender: #fabd2f;
+  --text: #ebdbb2;
+  --subtext1: #d5c4a1;
+  --subtext0: #bdae93;
+  --overlay2: #a89984;
+  --overlay1: #928374;
+  --overlay0: #7c6f64;
+  --surface2: #665c54;
+  --surface1: #504945;
+  --surface0: #3c3836;
+  --base: #282828;
+  --mantle: #1d2021;
+  --crust: #1d2021;
+}
+
+:root[data-theme='gruvbox-light'] {
+  color-scheme: light;
+  --rosewater: #d65d0e;
+  --flamingo: #cc241d;
+  --pink: #b16286;
+  --mauve: #8f3f71;
+  --red: #9d0006;
+  --maroon: #cc241d;
+  --peach: #af3a03;
+  --yellow: #b57614;
+  --green: #79740e;
+  --teal: #427b58;
+  --sky: #076678;
+  --sapphire: #458588;
+  --blue: #076678;
+  --lavender: #b57614;
+  --text: #3c3836;
+  --subtext1: #504945;
+  --subtext0: #665c54;
+  --overlay2: #7c6f64;
+  --overlay1: #928374;
+  --overlay0: #a89984;
+  --surface2: #bdae93;
+  --surface1: #d5c4a1;
+  --surface0: #ebdbb2;
+  --base: #fbf1c7;
+  --mantle: #f2e5bc;
+  --crust: #ebdbb2;
+}
+
+/*
+ * Tokyo Night (the "night" variant) — https://github.com/folke/tokyonight.nvim
+ */
+:root[data-theme='tokyo-night'] {
+  color-scheme: dark;
+  --rosewater: #c0caf5;
+  --flamingo: #ff9e64;
+  --pink: #ff007c;
+  --mauve: #bb9af7;
+  --red: #f7768e;
+  --maroon: #db4b4b;
+  --peach: #ff9e64;
+  --yellow: #e0af68;
+  --green: #9ece6a;
+  --teal: #73daca;
+  --sky: #7dcfff;
+  --sapphire: #2ac3de;
+  --blue: #7aa2f7;
+  --lavender: #89ddff;
+  --text: #c0caf5;
+  --subtext1: #a9b1d6;
+  --subtext0: #a9b1d6;
+  --overlay2: #737aa2;
+  --overlay1: #737aa2;
+  --overlay0: #565f89;
+  --surface2: #545c7e;
+  --surface1: #414868;
+  --surface0: #292e42;
+  --base: #1a1b26;
+  --mantle: #16161e;
+  --crust: #0c0e14;
+}
+
 /* Roles. Components use these, never the raw palette, unless they want a hue. */
 :root {
   --bg: var(--base);
@@ -138,7 +239,7 @@
   --accent-alt: var(--blue);
   --on-accent: var(--crust);
 
-  /* Pixel art needs a light and a dark that stay put across flavors. */
+  /* Pixel art needs a light and a dark that stay put across themes. */
   --px-light: var(--text);
   --px-dark: var(--crust);
 
@@ -150,11 +251,27 @@
   --bar-h: 48px;
 }
 
-:root[data-flavor='latte'] {
-  /* Latte's overlays are too pale for small text on a light base. */
+/* Light themes: the pale overlays are unreadable as small text on a light base. */
+:root[data-theme='latte'],
+:root[data-theme='gruvbox-light'] {
   --fg-soft: var(--subtext1);
   --fg-dim: var(--subtext0);
   --on-accent: var(--base);
   --px-light: #ffffff;
   --px-dark: var(--text);
+}
+
+:root[data-theme='gruvbox-light'] {
+  --px-light: #f9f5d7;
+}
+
+/* Each family keeps its own signature accent. */
+:root[data-theme='gruvbox-dark'],
+:root[data-theme='gruvbox-light'] {
+  --accent: var(--peach);
+}
+
+:root[data-theme='tokyo-night'] {
+  --accent: var(--blue);
+  --accent-alt: var(--sky);
 }

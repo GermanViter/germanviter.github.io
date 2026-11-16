@@ -1,0 +1,115 @@
+.theme-menu {
+  position: relative;
+}
+
+.theme-menu__button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 32px;
+  padding: 0 8px;
+  color: var(--fg-soft);
+  font-size: 12px;
+  white-space: nowrap;
+  transition:
+    background-color 0.15s ease-out,
+    color 0.15s ease-out;
+}
+
+.theme-menu__button:hover,
+.theme-menu__button[aria-expanded='true'] {
+  background: var(--line);
+  color: var(--fg);
+}
+
+.theme-menu__button:active .theme-menu__swatch {
+  transform: scale(0.9);
+}
+
+.theme-menu__swatch {
+  display: grid;
+  grid-template-columns: repeat(2, 7px);
+  grid-template-rows: repeat(2, 7px);
+  transition: transform 0.15s ease-out;
+}
+
+.theme-menu__swatch i {
+  display: block;
+}
+
+.theme-menu__panel {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 30;
+  width: 220px;
+  padding: 6px;
+  border: 1px solid var(--accent);
+  background: var(--bg);
+  box-shadow: 6px 6px 0 color-mix(in srgb, var(--bg-sunken) 70%, transparent);
+}
+
+.theme-menu__group + .theme-menu__group {
+  margin-top: 6px;
+  padding-top: 6px;
+  border-top: 1px solid var(--line);
+}
+
+.theme-menu__family {
+  padding: 2px 8px 4px;
+  color: var(--fg-dim);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.theme-menu__option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 6px 8px;
+  color: var(--fg-soft);
+  font-size: 13px;
+  text-align: left;
+  transition:
+    background-color 0.15s ease-out,
+    color 0.15s ease-out;
+}
+
+.theme-menu__option:hover {
+  background: var(--line);
+  color: var(--fg);
+}
+
+.theme-menu__option[aria-pressed='true'] {
+  color: var(--fg);
+  font-weight: 700;
+}
+
+/* A tiny window in the theme's own colors. */
+.theme-menu__preview {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  padding: 4px 5px;
+  border: 1px solid var(--line-strong);
+}
+
+.theme-menu__preview i {
+  display: block;
+  width: 7px;
+  height: 7px;
+}
+
+.theme-menu__check {
+  margin-left: auto;
+  color: var(--accent);
+  font-size: 10px;
+}
+
+@media (max-width: 640px) {
+  .theme-menu__name {
+    display: none;
+  }
+}

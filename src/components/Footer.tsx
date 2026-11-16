@@ -12,7 +12,7 @@ export function Footer() {
           <span className="footer__sep" aria-hidden="true">
             ·
           </span>
-          <kbd>t</kbd> switch flavor
+          <kbd>t</kbd> next theme
         </p>
 
         <ul className="footer__links">
@@ -30,15 +30,11 @@ export function Footer() {
         </ul>
 
         <p className="footer__note">
-          © {YEAR} German Viter. Built with TypeScript, Vite and React. Colors by{' '}
-          <a className="footer__link" href="https://catppuccin.com" target="_blank" rel="noreferrer">
-            Catppuccin
-          </a>
-          , look inspired by{' '}
+          © {YEAR} German Viter. Built with TypeScript, Vite and React. Look inspired by{' '}
           <a className="footer__link" href="https://omarchy.org" target="_blank" rel="noreferrer">
             Omarchy
           </a>
-          .
+          , themes by Catppuccin, Gruvbox and Tokyo Night.
         </p>
       </div>
     </footer>

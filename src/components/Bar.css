@@ -102,39 +102,6 @@
   gap: 4px;
 }
 
-.bar__flavor {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  height: 32px;
-  padding: 0 8px;
-  color: var(--fg-soft);
-  font-size: 12px;
-  transition:
-    background-color 0.15s ease-out,
-    color 0.15s ease-out;
-}
-
-.bar__flavor:hover {
-  background: var(--line);
-  color: var(--fg);
-}
-
-.bar__flavor:active .bar__swatch {
-  transform: scale(0.9);
-}
-
-.bar__swatch {
-  display: grid;
-  grid-template-columns: repeat(2, 7px);
-  grid-template-rows: repeat(2, 7px);
-  transition: transform 0.15s ease-out;
-}
-
-.bar__swatch i {
-  display: block;
-}
-
 .bar__icon {
   display: grid;
   place-items: center;
@@ -178,7 +145,6 @@
     font-size: 12px;
   }
 
-  .bar__flavor-name,
   .bar__icon,
   .bar__cta {
     display: none;

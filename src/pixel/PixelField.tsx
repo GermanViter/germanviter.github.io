@@ -3,7 +3,7 @@ import './pixel.css'
 
 const PITCH = 20
 const SQUARE = 10
-const HUES = ['--mauve', '--blue', '--lavender'] as const
+const HUES = ['--accent', '--blue', '--lavender'] as const
 const ALPHAS = [0.1, 0.16, 0.26]
 const TICK_MS = 140
 
@@ -81,9 +81,9 @@ function buildCells(width: number, height: number): Cell[] {
 
 /**
  * The dithered square field behind every page, thickest at the screen edges.
- * `flavor` is only a redraw trigger: the colors are read from the CSS variables.
+ * `theme` is only a redraw trigger: the colors are read from the CSS variables.
  */
-export function PixelField({ flavor }: { flavor: string }) {
+export function PixelField({ theme }: { theme: string }) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
@@ -143,7 +143,7 @@ export function PixelField({ flavor }: { flavor: string }) {
       window.removeEventListener('resize', draw)
       reducedMotion.removeEventListener('change', start)
     }
-  }, [flavor])
+  }, [theme])
 
   return <canvas ref={canvasRef} className="pixel-field" aria-hidden="true" />
 }

@@ -3,8 +3,10 @@
 My personal site: who I am, the projects I am proudest of, and where I have worked.
 
 Built with TypeScript, Vite and React. The look borrows from [omarchy.org](https://omarchy.org):
-sharp corners, a monospace font, pixel art and a dithered background, all in
-[Catppuccin](https://catppuccin.com) colors.
+sharp corners, a monospace font, pixel art and a dithered background. It ships with
+seven themes: the four [Catppuccin](https://catppuccin.com) flavors (Mocha is the
+default), [Gruvbox](https://github.com/morhetz/gruvbox) dark and light, and
+[Tokyo Night](https://github.com/folke/tokyonight.nvim).
 
 ## Run it
 
@@ -24,8 +26,8 @@ npm run lint
 | `/projects`    | Pinned repos, the dotfiles family, work in progress, everything else  |
 | `/experience`  | Work experience                                                       |
 
-Keyboard: `1` `2` `3` switch pages, `t` cycles the Catppuccin flavor
-(Mocha, Macchiato, Frappé, Latte). The choice is saved in `localStorage`.
+Keyboard: `1` `2` `3` switch pages, `t` jumps to the next theme. The theme menu in the
+top bar lists all of them. The choice is saved in `localStorage`.
 
 ## Editing the content
 
@@ -38,6 +40,7 @@ All text lives in `src/data/`, separate from the components:
 | `projects.ts`   | Pinned repos, dotfiles tree, work in progress, other repos     |
 | `experience.ts` | Jobs                                                           |
 | `nav.ts`        | Pages and their keyboard shortcuts                             |
+| `themes.ts`     | The list of themes shown in the theme menu                     |
 
 Project screenshots are in `src/assets/projects/`.
 
@@ -54,9 +57,18 @@ To add a sprite, add an entry to `SPRITES` and use its key as the `name`.
 
 ## Theming
 
-`src/styles/theme.css` defines the four Catppuccin flavors as CSS variables, then maps
-them to roles (`--bg`, `--fg`, `--accent`, and so on). Components use the roles, so a
-flavor switch is just a different `data-flavor` on `<html>`.
+`src/styles/theme.css` gives every theme the same 26 color slots, named after the
+Catppuccin palette, then maps them to roles (`--bg`, `--fg`, `--accent`, and so on).
+Components use the roles, so switching themes is just a different `data-theme` on
+`<html>`.
+
+To add a theme:
+
+1. Add a `:root[data-theme='your-id']` block to `theme.css` that fills the 26 slots.
+   For a light theme, also add it to the "Light themes" rule below the roles.
+2. Add an entry to `THEMES` in `src/data/themes.ts`.
+3. Add the id to the list in the inline script in `index.html`, so the saved theme is
+   applied before first paint.
 
 ## Deploying
 

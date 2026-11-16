@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
-import { FLAVOR_LABEL, type Flavor } from '../hooks/useFlavor'
 import { WORKSPACES } from '../data/nav'
 import { profile } from '../data/profile'
+import type { ThemeId } from '../data/themes'
 import { PixelText } from '../pixel/PixelText'
 import { Sprite } from '../pixel/Sprite'
+import { ThemeMenu } from './ThemeMenu'
 import './Bar.css'
 
 const clockFormat = new Intl.DateTimeFormat('en-CA', {
@@ -31,12 +32,12 @@ function Clock() {
 }
 
 interface BarProps {
-  flavor: Flavor
-  onCycleFlavor: () => void
+  theme: ThemeId
+  onSelectTheme: (theme: ThemeId) => void
 }
 
 /** The top bar, laid out like a Hyprland status bar: workspaces, clock, tray. */
-export function Bar({ flavor, onCycleFlavor }: BarProps) {
+export function Bar({ theme, onSelectTheme }: BarProps) {
   return (
     <header className="bar">
       <div className="bar__inner">
@@ -63,21 +64,7 @@ export function Bar({ flavor, onCycleFlavor }: BarProps) {
         <Clock />
 
         <div className="bar__tray">
-          <button
-            type="button"
-            className="bar__flavor"
-            onClick={onCycleFlavor}
-            aria-label={`Catppuccin flavor: ${FLAVOR_LABEL[flavor]}. Switch flavor`}
-            title="Switch Catppuccin flavor (t)"
-          >
-            <span className="bar__swatch" aria-hidden="true">
-              <i style={{ background: 'var(--mauve)' }} />
-              <i style={{ background: 'var(--blue)' }} />
-              <i style={{ background: 'var(--green)' }} />
-              <i style={{ background: 'var(--peach)' }} />
-            </span>
-            <span className="bar__flavor-name">{FLAVOR_LABEL[flavor].toLowerCase()}</span>
-          </button>
+          <ThemeMenu theme={theme} onSelect={onSelectTheme} />
           <a
             className="bar__icon"
             href={profile.github}
