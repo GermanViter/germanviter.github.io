@@ -20,7 +20,7 @@ export const THEMES = [
 
 export type ThemeId = (typeof THEMES)[number]['id']
 
-export const DEFAULT_THEME: ThemeId = 'mocha'
+export const DEFAULT_THEME: ThemeId = 'gruvbox-dark'
 
 /** "Catppuccin Mocha", "Gruvbox Dark", but just "Tokyo Night". */
 export function themeLabel(theme: Theme): string {
