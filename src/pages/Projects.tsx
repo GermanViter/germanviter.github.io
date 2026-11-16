@@ -137,14 +137,10 @@ function PinnedCard({ project, index }: { project: PinnedProject; index: number 
   )
 }
 
-function DotfilesRepo({ node, branch }: { node: DotfilesNode; branch?: string }) {
+function DotfilesRepo({ node, child = false }: { node: DotfilesNode; child?: boolean }) {
   return (
     <li className="tree__node">
-      {branch && (
-        <span className="tree__branch" aria-hidden="true">
-          {branch}
-        </span>
-      )}
+      {child && <span className="tree__branch" aria-hidden="true" />}
       <a
         className="tree__card"
         href={repoUrl(node.name)}
@@ -192,12 +188,8 @@ export function Projects() {
 
         <ul className="tree">
           <DotfilesRepo node={dotfiles.core} />
-          {dotfiles.systems.map((node, index) => (
-            <DotfilesRepo
-              node={node}
-              branch={index === dotfiles.systems.length - 1 ? '└──' : '├──'}
-              key={node.name}
-            />
+          {dotfiles.systems.map((node) => (
+            <DotfilesRepo node={node} child key={node.name} />
           ))}
         </ul>
       </section>

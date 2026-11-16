@@ -26,60 +26,66 @@ export function Experience() {
       <section className="section" aria-labelledby="jobs-title">
         <SectionHead dir="~/experience" command="systemctl status 'job@*'" title="Work experience" id="jobs-title" />
 
-        <ol className="jobs">
-          {jobs.map((job) => (
-            <li className="job window" key={job.id}>
-              <div className="window__bar">
-                <span className={`job__state${job.current ? ' is-active' : ''}`}>
-                  <span className="dot" aria-hidden="true" />
-                  {job.current ? 'active (running)' : 'inactive (exited)'}
-                </span>
-                <span className="window__meta">{job.period}</span>
-              </div>
-              <div className="window__body job__body">
-                <Sprite name={job.sprite} size={64} className="job__sprite" />
-                <div className="job__main">
-                  <h3 className="job__role">{job.role}</h3>
-                  <p className="job__company">{job.company}</p>
-                  <ul className="job__duties">
-                    {job.duties.map((duty) => (
-                      <li key={duty}>{duty}</li>
-                    ))}
-                  </ul>
+        <div className="experience">
+          <ol className="jobs">
+            {jobs.map((job) => (
+              <li className="job window" key={job.id}>
+                <div className="window__bar">
+                  <span className={`job__state${job.current ? ' is-active' : ''}`}>
+                    <span className="dot" aria-hidden="true" />
+                    {job.current ? 'active (running)' : 'inactive (exited)'}
+                  </span>
+                  <span className="window__meta">{job.period}</span>
                 </div>
-              </div>
-            </li>
-          ))}
-        </ol>
-      </section>
+                <div className="window__body job__body">
+                  <Sprite name={job.sprite} size={64} className="job__sprite" />
+                  <div className="job__main">
+                    <h3 className="job__role">{job.role}</h3>
+                    <p className="job__company">{job.company}</p>
+                    <ul className="job__duties">
+                      {job.duties.map((duty) => (
+                        <li key={duty}>{duty}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </li>
+            ))}
+          </ol>
 
-      <section className="section" aria-labelledby="next-title">
-        <div className="next window">
-          <div className="window__body next__body">
-            <Prompt dir="~/experience" command="echo $NEXT" />
-            <h2 className="section__title" id="next-title">
-              The next entry should be a dev job
-            </h2>
-            <p className="next__text">
-              I am looking for a {profile.seeking} in software. If you want to know what I can do, the{' '}
-              <Link className="link" to="/projects">
-                projects page
-              </Link>{' '}
-              says it better than a résumé.
-            </p>
-            <div className="next__actions">
-              <a className="btn btn--primary" href={`mailto:${profile.email}`}>
-                <Sprite name="mail" size={16} />
-                Email me
-              </a>
-              {linkedin && (
-                <a className="btn" href={linkedin.href} target="_blank" rel="noreferrer">
-                  <Sprite name="linkedin" size={16} />
-                  LinkedIn
-                </a>
-              )}
+          <aside className="next window" aria-labelledby="next-title">
+            <div className="window__bar">
+              <span className="next__state">
+                <span className="dot" aria-hidden="true" />
+                queued
+              </span>
+              <span className="window__meta">Summer 2027</span>
             </div>
-          </div>
+            <div className="window__body next__body">
+              <h2 className="next__title" id="next-title">
+                The next entry should be a dev job
+              </h2>
+              <p className="next__text">
+                I am looking for a {profile.seeking} in software. The{' '}
+                <Link className="link" to="/projects">
+                  projects page
+                </Link>{' '}
+                shows what I can do better than a résumé does.
+              </p>
+              <div className="next__actions">
+                <a className="btn btn--primary" href={`mailto:${profile.email}`}>
+                  <Sprite name="mail" size={16} />
+                  Email me
+                </a>
+                {linkedin && (
+                  <a className="btn" href={linkedin.href} target="_blank" rel="noreferrer">
+                    <Sprite name="linkedin" size={16} />
+                    LinkedIn
+                  </a>
+                )}
+              </div>
+            </div>
+          </aside>
         </div>
       </section>
     </>

@@ -25,9 +25,6 @@
   padding: 0 2px;
   color: var(--accent);
   transition: color 0.15s ease-out;
-}
-
-.bar__logo .pixel-text {
   --px: 3px;
 }
 

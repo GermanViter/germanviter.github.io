@@ -151,6 +151,9 @@
 }
 
 :root[data-flavor='latte'] {
+  /* Latte's overlays are too pale for small text on a light base. */
+  --fg-soft: var(--subtext1);
+  --fg-dim: var(--subtext0);
   --on-accent: var(--base);
   --px-light: #ffffff;
   --px-dark: var(--text);

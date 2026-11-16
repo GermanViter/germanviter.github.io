@@ -216,13 +216,35 @@
   gap: 14px;
 }
 
+/* The connector from the shared core down to each system repo. */
 .tree__branch {
-  display: flex;
-  align-items: center;
+  position: relative;
   flex-shrink: 0;
-  padding-left: 14px;
-  color: var(--fg-dim);
-  white-space: pre;
+  width: 30px;
+  margin-left: 18px;
+}
+
+.tree__branch::before,
+.tree__branch::after {
+  content: '';
+  position: absolute;
+  left: 0;
+}
+
+.tree__branch::before {
+  top: -10px;
+  bottom: 0;
+  border-left: 1px solid var(--overlay0);
+}
+
+.tree__branch::after {
+  top: 50%;
+  width: 100%;
+  border-top: 1px solid var(--overlay0);
+}
+
+.tree__node:last-child .tree__branch::before {
+  bottom: 50%;
 }
 
 .tree__card {
@@ -267,7 +289,8 @@
   }
 
   .tree__branch {
-    padding-left: 0;
+    width: 16px;
+    margin-left: 8px;
   }
 }
 

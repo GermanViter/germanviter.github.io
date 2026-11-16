@@ -1,7 +1,7 @@
+/* Set --px on an ancestor to size the text; it is the edge of one pixel. */
 .pixel-text {
-  --px: 8px;
   display: block;
-  height: calc(var(--px) * var(--rows, 7));
+  height: calc(var(--px, 8px) * var(--rows, 7));
   width: auto;
   max-width: 100%;
   flex-shrink: 0;

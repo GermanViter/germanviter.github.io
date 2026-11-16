@@ -1,7 +1,13 @@
+.experience {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: 16px;
+  align-items: start;
+}
+
 .jobs {
   display: grid;
   gap: 16px;
-  max-width: 860px;
 }
 
 .job__state {
@@ -67,32 +73,66 @@
   }
 }
 
-/* ---------- call to action ---------- */
+/* ---------- what comes next ---------- */
 
 .next {
-  max-width: 860px;
+  position: sticky;
+  top: calc(var(--bar-h) + 16px);
   border-color: var(--accent);
 }
 
+.next .window__bar {
+  border-bottom-color: var(--accent);
+}
+
+.next__state {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--accent);
+}
+
+.next__state .dot {
+  animation: blink 1.6s steps(1, end) infinite;
+}
+
 .next__body {
-  padding: 28px;
+  padding: 24px;
+}
+
+.next__title {
+  font-size: 20px;
 }
 
 .next__text {
-  max-width: 60ch;
   margin-top: 10px;
   color: var(--fg-soft);
+  font-size: 14px;
 }
 
 .next__actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
+  display: grid;
+  gap: 10px;
   margin-top: 22px;
+}
+
+@media (max-width: 980px) {
+  .experience {
+    grid-template-columns: 1fr;
+  }
+
+  .next {
+    position: static;
+  }
+
+  .next__actions {
+    display: flex;
+    flex-wrap: wrap;
+  }
 }
 
 @media (max-width: 560px) {
   .next__body {
-    padding: 20px;
+    padding: 18px;
   }
 }

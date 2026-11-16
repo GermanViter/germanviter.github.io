@@ -364,6 +364,12 @@ kbd {
   font-size: clamp(15px, 1.6vw, 17px);
 }
 
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
