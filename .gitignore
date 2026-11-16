@@ -12,6 +12,10 @@ dist
 dist-ssr
 *.local
 
+# Fetched from GitHub before every dev and build run (scripts/fetch-pins.ts)
+src/data/pinned.generated.json
+public/pins/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

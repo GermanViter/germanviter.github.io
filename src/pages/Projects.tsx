@@ -1,8 +1,8 @@
 import { Prompt, SectionHead } from '../components/SectionHead'
 import {
   dotfiles,
+  hueOf,
   inProgress,
-  languageHue,
   moreRepos,
   pinned,
   repoUrl,
@@ -16,7 +16,7 @@ import './Projects.css'
 function Language({ name }: { name: string }) {
   return (
     <span className="language">
-      <span className="dot" style={{ color: `var(--${languageHue[name] ?? 'overlay1'})` }} aria-hidden="true" />
+      <span className="dot" style={{ color: `var(--${hueOf(name)})` }} aria-hidden="true" />
       {name}
     </span>
   )
@@ -66,8 +66,7 @@ function NvimBuffer() {
 }
 
 function PinnedCard({ project, index }: { project: PinnedProject; index: number }) {
-  const { media } = project
-  const url = repoUrl(project.name)
+  const { media, url } = project
 
   return (
     <li className="pin window window--hover">
@@ -81,6 +80,10 @@ function PinnedCard({ project, index }: { project: PinnedProject; index: number 
       <div className="pin__media">
         {media.kind === 'code' ? (
           <NvimBuffer />
+        ) : media.kind === 'placeholder' ? (
+          <div className="pin__placeholder">
+            <Sprite name={project.sprite} size={96} />
+          </div>
         ) : (
           <img
             src={media.src}
@@ -105,28 +108,33 @@ function PinnedCard({ project, index }: { project: PinnedProject; index: number 
                 {project.name}
               </a>
             </h3>
-            <p className="pin__tagline">{project.tagline}</p>
+            {project.tagline && <p className="pin__tagline">{project.tagline}</p>}
           </div>
         </div>
 
-        <p className="pin__description">{project.description}</p>
+        {/* A repo I only just pinned has no override yet, so any of these can be missing. */}
+        {project.description && <p className="pin__description">{project.description}</p>}
 
-        <ul className="pin__highlights">
-          {project.highlights.map((highlight) => (
-            <li key={highlight}>{highlight}</li>
-          ))}
-        </ul>
+        {project.highlights.length > 0 && (
+          <ul className="pin__highlights">
+            {project.highlights.map((highlight) => (
+              <li key={highlight}>{highlight}</li>
+            ))}
+          </ul>
+        )}
 
-        <ul className="tags">
-          {project.tags.map((tag) => (
-            <li className="tag" key={tag}>
-              {tag}
-            </li>
-          ))}
-        </ul>
+        {project.tags.length > 0 && (
+          <ul className="tags">
+            {project.tags.map((tag) => (
+              <li className="tag" key={tag}>
+                {tag}
+              </li>
+            ))}
+          </ul>
+        )}
 
         <div className="pin__foot">
-          <Language name={project.language} />
+          {project.language && <Language name={project.language} />}
           <span className="pin__since">since {project.since}</span>
           <a className="pin__link" href={url} target="_blank" rel="noreferrer" aria-label={`${project.name} on GitHub`}>
             GitHub <span aria-hidden="true">↗</span>
@@ -166,7 +174,7 @@ export function Projects() {
           <PixelText text="PROJECTS" shadow tracking={2} animate />
         </h1>
         <p className="page-head__lead">
-          The six repos pinned on my GitHub profile, the dotfiles that tie my machines together, and everything
+          The repos pinned on my GitHub profile, the dotfiles that tie my machines together, and everything
           else I have pushed since I started.
         </p>
       </header>

@@ -3,6 +3,9 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [master, main]
+  # Rebuild every day so the pinned repos stay in sync with my GitHub profile.
+  schedule:
+    - cron: '17 9 * * *'
   workflow_dispatch:
 
 permissions:
@@ -24,7 +27,19 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      # Social previews come from a host that rate-limits hard. Keeping the ones
+      # already downloaded means a preview does not vanish on a day it answers 429.
+      - uses: actions/cache@v4
+        with:
+          path: |
+            public/pins
+            src/data/pinned.generated.json
+          key: pins-${{ github.run_id }}
+          restore-keys: pins-
       - run: npm run build
+        env:
+          # Read by scripts/fetch-pins.ts: the GraphQL API needs a token even for public data.
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist

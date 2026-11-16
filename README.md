@@ -44,6 +44,20 @@ All text lives in `src/data/`, separate from the components:
 
 Project screenshots are in `src/assets/projects/`.
 
+### Pinned repos
+
+Which repos are pinned, and their language, creation date and order, come straight
+from my GitHub profile. `scripts/fetch-pins.ts` runs before `npm run dev` and
+`npm run build` and writes `src/data/pinned.generated.json` (not committed). It needs
+a GitHub token: `GITHUB_TOKEN` if set, otherwise the one `gh` is logged in with.
+
+The writing stays by hand, in `overrides` in `projects.ts`, keyed by repo name:
+tagline, description, highlights, tags, sprite and screenshot. A repo with no
+override yet falls back to its GitHub description, topics and social preview.
+
+The deploy workflow also runs once a day, so pinning or unpinning a repo on GitHub
+shows up on the site without a commit.
+
 ## Pixel art
 
 Everything pixelated is drawn from plain text, no image files:
