@@ -1,0 +1,98 @@
+.jobs {
+  display: grid;
+  gap: 16px;
+  max-width: 860px;
+}
+
+.job__state {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--fg-dim);
+}
+
+.job__state.is-active {
+  color: var(--green);
+}
+
+.job__body {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+  padding: 24px;
+}
+
+.job__main {
+  min-width: 0;
+}
+
+.job__role {
+  font-size: 19px;
+}
+
+.job__company {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.job__duties {
+  display: grid;
+  gap: 4px;
+  margin-top: 14px;
+  color: var(--fg-soft);
+  font-size: 14px;
+}
+
+.job__duties li {
+  position: relative;
+  padding-left: 2.2ch;
+}
+
+.job__duties li::before {
+  content: '-';
+  position: absolute;
+  left: 0;
+  color: var(--fg-dim);
+}
+
+@media (max-width: 560px) {
+  .job__body {
+    gap: 16px;
+    padding: 18px;
+  }
+
+  .job__sprite {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+/* ---------- call to action ---------- */
+
+.next {
+  max-width: 860px;
+  border-color: var(--accent);
+}
+
+.next__body {
+  padding: 28px;
+}
+
+.next__text {
+  max-width: 60ch;
+  margin-top: 10px;
+  color: var(--fg-soft);
+}
+
+.next__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 22px;
+}
+
+@media (max-width: 560px) {
+  .next__body {
+    padding: 20px;
+  }
+}

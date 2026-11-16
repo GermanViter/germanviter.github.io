@@ -1,0 +1,375 @@
+.language {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--fg-soft);
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+/* ---------- pinned ---------- */
+
+.pins {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.pin__media {
+  aspect-ratio: 16 / 9.5;
+  border-bottom: 1px solid var(--line-strong);
+  background: var(--bg-sunken);
+  overflow: hidden;
+}
+
+.pin__media img {
+  width: 100%;
+  height: 100%;
+  object-position: center top;
+}
+
+.pin__body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 16px;
+  padding: 20px;
+}
+
+.pin__head {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.pin__name {
+  font-size: 18px;
+}
+
+.pin__name a {
+  transition: color 0.15s ease-out;
+}
+
+.pin__name a:hover {
+  color: var(--accent);
+}
+
+.pin__tagline {
+  color: var(--fg-soft);
+  font-size: 13px;
+}
+
+.pin__description {
+  font-size: 14px;
+}
+
+.pin__highlights {
+  display: grid;
+  gap: 4px;
+  color: var(--fg-soft);
+  font-size: 13px;
+}
+
+.pin__highlights li {
+  position: relative;
+  padding-left: 2.2ch;
+}
+
+.pin__highlights li::before {
+  content: '+';
+  position: absolute;
+  left: 0;
+  color: var(--green);
+  font-weight: 700;
+}
+
+.pin__foot {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: auto;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+  font-size: 12px;
+}
+
+.pin__since {
+  color: var(--fg-dim);
+}
+
+.pin__link {
+  margin-left: auto;
+  color: var(--accent-alt);
+  font-size: 13px;
+  font-weight: 600;
+  transition: color 0.15s ease-out;
+}
+
+.pin__link:hover {
+  color: var(--accent);
+}
+
+@media (max-width: 860px) {
+  .pins {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- the init.lua "screenshot" ---------- */
+
+.nvim {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--bg-raised);
+  font-size: clamp(10px, 1.15vw, 12.5px);
+  line-height: 1.55;
+}
+
+.nvim__code {
+  flex: 1;
+  padding: 12px 0;
+  overflow: hidden;
+  color: var(--fg);
+}
+
+.nvim__line:first-child {
+  background: color-mix(in srgb, var(--surface0) 60%, transparent);
+}
+
+.nvim__line {
+  display: block;
+  padding-right: 12px;
+}
+
+.nvim__number {
+  display: inline-block;
+  width: 4ch;
+  margin-right: 2ch;
+  color: var(--surface2);
+  text-align: right;
+  user-select: none;
+}
+
+.nvim__line:first-child .nvim__number {
+  color: var(--lavender);
+}
+
+.hl-keyword {
+  color: var(--mauve);
+}
+
+.hl-string {
+  color: var(--green);
+}
+
+.hl-number {
+  color: var(--peach);
+}
+
+.hl-function {
+  color: var(--blue);
+}
+
+.hl-property {
+  color: var(--lavender);
+}
+
+.nvim__status {
+  display: flex;
+  align-items: stretch;
+  background: var(--bg-sunken);
+  color: var(--fg-soft);
+}
+
+.nvim__status span {
+  padding: 1px 1.2ch;
+  white-space: nowrap;
+}
+
+.nvim__mode {
+  background: var(--blue);
+  color: var(--on-accent);
+  font-weight: 700;
+}
+
+.nvim__file {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.nvim__pos {
+  margin-left: auto;
+  background: var(--surface0);
+}
+
+/* ---------- dotfiles tree ---------- */
+
+.tree {
+  display: grid;
+  gap: 10px;
+}
+
+.tree__node {
+  display: flex;
+  align-items: stretch;
+  gap: 14px;
+}
+
+.tree__branch {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  padding-left: 14px;
+  color: var(--fg-dim);
+  white-space: pre;
+}
+
+.tree__card {
+  display: grid;
+  grid-template-columns: 17ch 15ch minmax(0, 1fr);
+  flex: 1;
+  gap: 2px 20px;
+  align-items: baseline;
+  min-width: 0;
+  padding: 14px 18px;
+  border: 1px solid var(--line-strong);
+  border-left: 3px solid var(--hue);
+  background: var(--bg);
+  transition:
+    border-color 0.15s ease-out,
+    background-color 0.15s ease-out;
+}
+
+.tree__card:hover {
+  border-color: var(--hue);
+  background: color-mix(in srgb, var(--hue) 6%, var(--bg));
+}
+
+.tree__name {
+  color: var(--hue);
+  font-weight: 700;
+}
+
+.tree__role {
+  color: var(--fg);
+  font-size: 13px;
+}
+
+.tree__note {
+  color: var(--fg-soft);
+  font-size: 13px;
+}
+
+@media (max-width: 860px) {
+  .tree__card {
+    grid-template-columns: 1fr;
+  }
+
+  .tree__branch {
+    padding-left: 0;
+  }
+}
+
+/* ---------- in progress ---------- */
+
+.wips {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.wip .window__body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.wip__status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--yellow);
+}
+
+.wip__context {
+  margin-top: -8px;
+  color: var(--fg-dim);
+  font-size: 13px;
+}
+
+@media (max-width: 860px) {
+  .wips {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- everything else (ls -l) ---------- */
+
+.listing__row {
+  display: grid;
+  grid-template-columns: 9ch 12ch 17ch minmax(0, 1fr) auto;
+  gap: 0 16px;
+  align-items: baseline;
+  padding: 10px 18px;
+  font-size: 13px;
+  transition: background-color 0.15s ease-out;
+}
+
+.listing li + li .listing__row {
+  border-top: 1px solid var(--line);
+}
+
+.listing__row:hover {
+  background: var(--bg-raised);
+}
+
+.listing__date {
+  color: var(--fg-dim);
+}
+
+.listing__name {
+  color: var(--accent-alt);
+  font-weight: 700;
+  transition: color 0.15s ease-out;
+}
+
+.listing__row:hover .listing__name {
+  color: var(--accent);
+}
+
+.listing__desc {
+  color: var(--fg-soft);
+}
+
+.listing__arrow {
+  color: var(--fg-dim);
+}
+
+@media (max-width: 860px) {
+  .listing__row {
+    grid-template-columns: 1fr auto;
+    gap: 2px 12px;
+    padding: 12px 16px;
+  }
+
+  .listing__name {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .listing__lang {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .listing__desc {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+
+  .listing__date,
+  .listing__arrow {
+    display: none;
+  }
+}
