@@ -9,7 +9,7 @@
     "lint": "oxlint",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@fontsource-variable/jetbrains-mono": "^5.3.0",
@@ -27,6 +27,6 @@
     "typescript": "~7.0.2",
     "vite": "^8.3.6"
   },
-  "homepage": "https://germanViter.github.io"
+  "homepage": "https://germanviter.github.io"
 }
 

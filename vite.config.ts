@@ -6,5 +6,5 @@ export default defineConfig({
   plugins: [react()],
   // Relative asset paths, so the build works from a domain root or a sub-path
   // (GitHub Pages project sites) without extra configuration.
-  base: './',
+  base: '/',
 })
