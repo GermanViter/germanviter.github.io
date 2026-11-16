@@ -4,7 +4,10 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "fetch-pins": "node scripts/fetch-pins.ts",
+    "predev": "npm run fetch-pins",
     "dev": "vite",
+    "prebuild": "npm run fetch-pins",
     "build": "tsc -b && vite build",
     "lint": "oxlint",
     "preview": "vite preview",

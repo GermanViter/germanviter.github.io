@@ -28,6 +28,12 @@
   object-position: center top;
 }
 
+.pin__placeholder {
+  display: grid;
+  height: 100%;
+  place-items: center;
+}
+
 .pin__body {
   display: flex;
   flex: 1;
