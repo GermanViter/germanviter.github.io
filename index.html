@@ -15,7 +15,12 @@
       content="IT student in Montréal who lives in the terminal. Projects, dotfiles and experience."
     />
     <meta property="og:type" content="website" />
-    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <!--
+      Bundled by Vite instead of served as /favicon.svg. Every Vite project on
+      localhost:5173 serves that same address, and browsers cache tab icons by
+      address, so another project's icon would show up on this site.
+    -->
+    <link rel="icon" type="image/svg+xml" href="/src/assets/favicon.svg" />
     <script>
       // Apply the saved theme before first paint ('flavor' is the old storage key).
       try {
