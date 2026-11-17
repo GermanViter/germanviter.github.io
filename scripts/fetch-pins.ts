@@ -3,20 +3,15 @@
  * src/data/pinned.generated.json, with each repo's social preview image in
  * public/pins/. Runs before `dev` and `build`.
  *
- * Pins are only exposed through the GraphQL API, which always needs a token:
- * GITHUB_TOKEN or GH_TOKEN if set (CI), otherwise whatever `gh` is logged in with.
- *
- * If the fetch fails and an earlier copy of the file exists, a local run keeps
- * it and carries on, so working offline still works. CI always fails instead:
- * better to keep the last deploy than to publish stale data.
+ * Pins are only exposed through the GraphQL API; see scripts/github.ts for the
+ * token and for what happens when the fetch fails.
  */
-import { execFileSync } from 'node:child_process'
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import type { GithubPin } from '../src/data/github-pin.ts'
+import { generate, graphql, LOGIN } from './github.ts'
 
-const LOGIN = 'GermanViter'
 const OUTPUT = fileURLToPath(new URL('../src/data/pinned.generated.json', import.meta.url))
 const PUBLIC = fileURLToPath(new URL('../public/', import.meta.url))
 
@@ -62,18 +57,7 @@ interface PinNode {
 }
 
 interface Response {
-  data?: { user: { pinnedItems: { nodes: PinNode[] } } | null }
-  errors?: { message: string }[]
-}
-
-function findToken(): string {
-  const fromEnv = process.env.GITHUB_TOKEN || process.env.GH_TOKEN
-  if (fromEnv) return fromEnv
-  try {
-    return execFileSync('gh', ['auth', 'token'], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }).trim()
-  } catch {
-    throw new Error('no GitHub token: set GITHUB_TOKEN, or log in with `gh auth login`')
-  }
+  user: { pinnedItems: { nodes: PinNode[] } } | null
 }
 
 /** The pins written by the last run, so previews that have not changed are not downloaded again. */
@@ -115,21 +99,8 @@ async function downloadPreview(name: string, url: string, previous: GithubPin | 
 }
 
 async function fetchPins(): Promise<GithubPin[]> {
-  const response = await fetch('https://api.github.com/graphql', {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${findToken()}`,
-      'Content-Type': 'application/json',
-      'User-Agent': 'fetch-pins',
-    },
-    body: JSON.stringify({ query: QUERY, variables: { login: LOGIN } }),
-    signal: AbortSignal.timeout(15_000),
-  })
-  if (!response.ok) throw new Error(`GitHub answered HTTP ${response.status}`)
-
-  const { data, errors } = (await response.json()) as Response
-  if (errors?.length) throw new Error(errors.map((error) => error.message).join('; '))
-  if (!data?.user) throw new Error(`no GitHub user named ${LOGIN}`)
+  const data = await graphql<Response>(QUERY, { login: LOGIN }, 'fetch-pins')
+  if (!data.user) throw new Error(`no GitHub user named ${LOGIN}`)
 
   const previous = readPrevious()
   return Promise.all(
@@ -151,20 +122,4 @@ async function fetchPins(): Promise<GithubPin[]> {
   )
 }
 
-try {
-  const pins = await fetchPins()
-  const json = `${JSON.stringify(pins, null, 2)}\n`
-  // Leave the file alone when nothing changed, so the dev server does not reload for nothing.
-  if (!existsSync(OUTPUT) || readFileSync(OUTPUT, 'utf8') !== json) {
-    mkdirSync(dirname(OUTPUT), { recursive: true })
-    writeFileSync(OUTPUT, json)
-  }
-  console.log(`fetch-pins: ${pins.length} pinned (${pins.map((pin) => pin.name).join(', ')})`)
-} catch (error) {
-  const reason = error instanceof Error ? error.message : String(error)
-  if (process.env.CI || !existsSync(OUTPUT)) {
-    console.error(`fetch-pins: ${reason}`)
-    process.exit(1)
-  }
-  console.warn(`fetch-pins: ${reason}. Keeping the pins from the last successful fetch.`)
-}
+await generate('fetch-pins', OUTPUT, fetchPins, (pins) => `${pins.length} pinned (${pins.map((pin) => pin.name).join(', ')})`)

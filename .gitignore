@@ -12,8 +12,9 @@ dist
 dist-ssr
 *.local
 
-# Fetched from GitHub before every dev and build run (scripts/fetch-pins.ts)
+# Fetched from GitHub before every dev and build run (scripts/fetch-pins.ts, scripts/fetch-activity.ts)
 src/data/pinned.generated.json
+src/data/activity.generated.json
 public/pins/
 
 # Editor directories and files

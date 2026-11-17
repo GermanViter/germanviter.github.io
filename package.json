@@ -5,14 +5,16 @@
   "type": "module",
   "scripts": {
     "fetch-pins": "node scripts/fetch-pins.ts",
-    "predev": "npm run fetch-pins",
+    "predev": "npm run fetch-github",
     "dev": "vite",
-    "prebuild": "npm run fetch-pins",
+    "prebuild": "npm run fetch-github",
     "build": "tsc -b && vite build",
     "lint": "oxlint",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist",
+    "fetch-activity": "node scripts/fetch-activity.ts",
+    "fetch-github": "npm run fetch-pins && npm run fetch-activity"
   },
   "dependencies": {
     "@fontsource-variable/jetbrains-mono": "^5.3.0",
