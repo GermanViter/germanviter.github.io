@@ -1,0 +1,117 @@
+# Resume — single source of truth (JSON Resume schema, written as YAML)
+# https://jsonresume.org/schema
+# Custom keys (prefixed x-) are ignored by JSON Resume tools and used by the portfolio site.
+
+basics:
+  name: German Viter
+  email: viter.german@gmail.com
+  url: https://germanviter.github.io
+  location:
+    city: Montréal
+    region: Québec
+    countryCode: CA
+  profiles:
+    - network: GitHub
+      username: GermanViter
+      url: https://github.com/GermanViter
+  summary: >-
+    Je suis quelqu'un de travaillant et persévérant à la tâche. Lorsque je rencontre
+    un problème, je ne me laisse jamais abattre et tente toujours de trouver une
+    solution. J'ai un grand intérêt pour les sports d'équipe, ce qui a grandement
+    développé mon sens de travail de groupe. Je me considère comme un leader naturel,
+    car j'ai souvent été désigné en tant que capitaine dans les travaux d'équipes
+    scolaires. Je suis extrêmement motivé à travailler au sein de votre équipe et
+    n'importe quel poste me conviendrait. Je pense sincèrement être un atout dans
+    votre collectif.
+
+# Each job becomes a card on the site's Experience page, in this order (most recent first).
+# Push a change to master and the site redeploys with it.
+#   startDate / endDate  "YYYY-MM" or "YYYY". No endDate means the job is current.
+#   x-sprite             Pixel art for the card. Optional: without it, one is picked from
+#                        keywords in the position. Job sprites: shield, coffee, pi, book,
+#                        computer, lifebuoy, cart, wrench, box, briefcase (fallback).
+#   x-en                 English position and highlights for the site. Optional: without
+#                        it, the site shows the French text.
+work:
+  - name: Sécurité TITAN
+    position: Agent de sécurité privé externe
+    highlights:
+      - Surveiller des lieux privés
+      - Faire de la prévention du vol à l'étalage
+      - Faire du service à la clientèle
+      - Assurer le respect des règles de sécurité dans des lieux privés
+    x-sprite: shield
+    x-en:
+      position: Private security guard
+      highlights:
+        - Monitor private premises
+        - Prevent shoplifting
+        - Provide customer service on site
+        - Make sure safety rules are followed on private property
+
+  - name: Tutorat Expert
+    position: Tutorat en mathématiques en ligne
+    highlights:
+      - >-
+        Aider les élèves du secondaire et du primaire à réussir leur cours de
+        mathématiques tout en travaillant de la maison et avec un horaire qui est
+        propre à moi
+    x-sprite: pi
+    x-en:
+      position: Online math tutor
+      highlights:
+        - Help elementary and high school students succeed in their math classes
+        - Work remotely, on a schedule I manage myself
+
+  - name: Tim Hortons
+    position: Service à la clientèle
+    startDate: "2022-10"
+    endDate: "2023-05"
+    highlights:
+      - Préparer et servir de la nourriture aux clients
+      - Nettoyer les appareils servant à la préparation de boissons et de nourriture
+      - Mettre des aliments au four
+      - Passer le balai et effectuer d'autres tâches ménagères
+    x-sprite: coffee
+    x-en:
+      position: Customer service
+      highlights:
+        - Prepared and served food to customers
+        - Cleaned the equipment used to prepare drinks and food
+        - Baked food items in the oven
+        - Swept and handled other cleaning tasks
+
+education:
+  - institution: Cégep Marie-Victorin
+    area: Techniques de l'informatique
+    studyType: DEC
+    startDate: "2025-08"
+
+  - institution: École secondaire Antoine-de-Saint-Exupéry
+    area: Programme Langue-Études
+    studyType: Diplôme d'études secondaires
+    startDate: "2020"
+    endDate: "2025"
+
+certificates:
+  - name: Croix de bronze
+    issuer: Société de sauvetage du Québec
+  - name: Médaille de bronze
+    issuer: Société de sauvetage du Québec
+  - name: Premiers soins général
+    issuer: Société de sauvetage du Québec
+  - name: Sauveteur national
+    issuer: Société de sauvetage du Québec
+  - name: Formation de secourisme en milieu de travail
+    issuer: Xguard Security
+  - name: Formation de gardiennage
+    issuer: Xguard Security
+  - name: Permis d'agent de sécurité
+    issuer: Bureau de la sécurité privée (BSP)
+    date: "2026-08-10"
+
+languages:
+  - language: Français
+  - language: Anglais
+  - language: Russe
+  - language: Espagnol
