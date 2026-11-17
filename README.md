@@ -58,6 +58,14 @@ override yet falls back to its GitHub description, topics and social preview.
 The deploy workflow also runs once a day, so pinning or unpinning a repo on GitHub
 shows up on the site without a commit.
 
+### GitHub activity
+
+The top of the Projects page shows my contribution graph for the last year, a pixel
+pie of the languages in my public repos (forks excluded, measured in bytes, as GitHub
+does), and a few stats drawn from the graph. `scripts/fetch-activity.ts` runs next to
+`fetch-pins.ts`, with the same token, and writes `src/data/activity.generated.json`
+(not committed). The daily deploy keeps the graph current.
+
 ### Work experience
 
 `resume.yaml` at the repo root is my résumé in the [JSON Resume](https://jsonresume.org/schema)
