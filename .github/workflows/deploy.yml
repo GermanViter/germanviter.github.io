@@ -3,7 +3,7 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [master, main]
-  # Rebuild every day so the pinned repos stay in sync with my GitHub profile.
+  # Rebuild every day so the pinned repos and the contribution graph stay in sync with my GitHub profile.
   schedule:
     - cron: '17 9 * * *'
   workflow_dispatch:
