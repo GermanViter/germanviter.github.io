@@ -38,7 +38,7 @@ All text lives in `src/data/`, separate from the components:
 | `profile.ts`    | Name, links, fastfetch rows, the "about" cards, the toolbox    |
 | `timeline.ts`   | The developer history shown as a git log                       |
 | `projects.ts`   | Pinned repos, dotfiles tree, work in progress, other repos     |
-| `experience.ts` | Jobs                                                           |
+| `experience.ts` | Turns the jobs in `resume.yaml` into cards (see below)         |
 | `nav.ts`        | Pages and their keyboard shortcuts                             |
 | `themes.ts`     | The list of themes shown in the theme menu                     |
 
@@ -57,6 +57,27 @@ override yet falls back to its GitHub description, topics and social preview.
 
 The deploy workflow also runs once a day, so pinning or unpinning a repo on GitHub
 shows up on the site without a commit.
+
+### Work experience
+
+`resume.yaml` at the repo root is my résumé in the [JSON Resume](https://jsonresume.org/schema)
+format, and the single source of truth for the Experience page. To add a job, add an
+entry to `work` (most recent first) and push to master: the deploy workflow rebuilds the
+site, and the file's git history tracks every change. In `npm run dev` the page reloads
+as soon as the file is saved.
+
+- No `endDate` means the job is current. Dates are `"YYYY-MM"` or `"YYYY"`, in quotes.
+- `highlights` become the bullet list under the job title.
+- `x-en` holds the English `position` and `highlights` for the site. Without it, the
+  site shows the French text.
+- `x-sprite` picks the pixel art. Without it, `experience.ts` picks one from keywords in
+  the position (`spriteKeywords`), and falls back to `briefcase`. Job sprites so far:
+  `shield`, `coffee`, `pi`, `book`, `computer`, `lifebuoy`, `cart`, `wrench`, `box`,
+  `briefcase`. For a new kind of job, draw a sprite in `sprites.ts` and add its
+  keywords to `spriteKeywords`.
+
+A malformed entry fails the build with a message naming it, so the site keeps its last
+good deploy.
 
 ## Pixel art
 
