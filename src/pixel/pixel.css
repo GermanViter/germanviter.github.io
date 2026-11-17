@@ -41,3 +41,26 @@
   height: 100%;
   pointer-events: none;
 }
+
+.pixel-pie {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.pixel-pie__shadow {
+  fill: var(--pixel-shadow, color-mix(in srgb, var(--accent) 50%, var(--bg)));
+}
+
+.pixel-pie__outline {
+  fill: var(--px-dark);
+  pointer-events: none;
+}
+
+.pixel-pie__slice {
+  transition: opacity 0.15s steps(2, end);
+}
+
+.pixel-pie__slice[data-dim] {
+  opacity: 0.25;
+}
