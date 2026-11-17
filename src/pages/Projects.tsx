@@ -1,3 +1,4 @@
+import { Activity } from '../components/Activity'
 import { Prompt, SectionHead } from '../components/SectionHead'
 import {
   dotfiles,
@@ -178,6 +179,14 @@ export function Projects() {
           else I have pushed since I started.
         </p>
       </header>
+
+      <section className="section" aria-labelledby="activity-title">
+        <SectionHead dir="~/projects" command="git log --since='1 year ago'" title="A year on GitHub" id="activity-title">
+          Every commit, pull request and issue from the last twelve months, and the languages my public repos are
+          written in.
+        </SectionHead>
+        <Activity />
+      </section>
 
       <section className="section" aria-labelledby="pinned-title">
         <SectionHead dir="~/projects" command="ls pinned/" title="The ones I am proudest of" id="pinned-title" />
