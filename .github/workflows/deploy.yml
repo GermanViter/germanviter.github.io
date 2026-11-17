@@ -38,7 +38,7 @@ jobs:
           restore-keys: pins-
       - run: npm run build
         env:
-          # Read by scripts/fetch-pins.ts: the GraphQL API needs a token even for public data.
+          # Read by scripts/github.ts: the GraphQL API needs a token even for public data.
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - uses: actions/upload-pages-artifact@v3
         with:
