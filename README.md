@@ -35,7 +35,7 @@ All text lives in `src/data/`, separate from the components:
 
 | File            | Content                                                        |
 | --------------- | -------------------------------------------------------------- |
-| `profile.ts`    | Name, links, fastfetch rows, the "about" cards, the toolbox    |
+| `profile.ts`    | Name, links, typed roles, fastfetch rows, about cards, toolbox |
 | `timeline.ts`   | The developer history shown as a git log                       |
 | `projects.ts`   | Pinned repos, dotfiles tree, work in progress, other repos     |
 | `experience.ts` | Turns the jobs in `resume.yaml` into cards (see below)         |
