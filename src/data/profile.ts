@@ -10,6 +10,8 @@ export const profile = {
   seeking: 'summer 2027 internship',
   email: 'viter.german@gmail.com',
   github: 'https://github.com/GermanViter',
+  /** Typed one after the other after "I am" on the home page. */
+  roles: ['an IT student', 'a Linux ricer', 'a terminal dweller'],
 } as const
 
 export interface Social {

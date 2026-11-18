@@ -4,11 +4,40 @@ import { Socials } from '../components/Socials'
 import { fetchGroups, fetchLogo, profile, toolbox, traits } from '../data/profile'
 import { repoUrl } from '../data/projects'
 import { timeline } from '../data/timeline'
+import { useTypewriter } from '../hooks/useTypewriter'
 import { PixelText } from '../pixel/PixelText'
 import { Sprite } from '../pixel/Sprite'
 import './Home.css'
 
 const SWATCHES = ['red', 'peach', 'yellow', 'green', 'teal', 'blue', 'mauve', 'pink']
+
+const ROLES_SENTENCE = `I am ${new Intl.ListFormat('en', { type: 'conjunction' }).format(profile.roles)}`
+
+function Tagline() {
+  const typewriter = useTypewriter(profile.roles)
+
+  if (!typewriter) {
+    return (
+      <p className="hero__tagline">
+        {ROLES_SENTENCE}
+        <span className="hero__cursor" aria-hidden="true" />
+      </p>
+    )
+  }
+
+  return (
+    <p className="hero__tagline">
+      <span className="sr-only">{ROLES_SENTENCE}</span>
+      <span aria-hidden="true">
+        I am{' '}
+        <span className="hero__typed" style={{ '--chars': typewriter.word.length } as React.CSSProperties}>
+          {typewriter.text}
+          <span className={`hero__cursor${typewriter.busy ? ' is-busy' : ''}`} />
+        </span>
+      </span>
+    </p>
+  )
+}
 
 function Hero() {
   return (
@@ -25,10 +54,7 @@ function Hero() {
         <PixelText text="VITER" shadow tracking={2} animate />
       </h1>
 
-      <p className="hero__tagline">
-        IT student, Linux ricer, terminal dweller
-        <span className="hero__cursor" aria-hidden="true" />
-      </p>
+      <Tagline />
       <p className="hero__lead">
         I study IT at {profile.school} in Montréal, third semester of the DEC. Most of what I build starts in a
         terminal and ends up in a dotfiles repo.
