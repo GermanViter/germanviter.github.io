@@ -29,11 +29,8 @@ function Tagline() {
     <p className="hero__tagline">
       <span className="sr-only">{ROLES_SENTENCE}</span>
       <span aria-hidden="true">
-        I am{' '}
-        <span className="hero__typed" style={{ '--chars': typewriter.word.length } as React.CSSProperties}>
-          {typewriter.text}
-          <span className={`hero__cursor${typewriter.busy ? ' is-busy' : ''}`} />
-        </span>
+        I am {typewriter.text}
+        <span className={`hero__cursor${typewriter.busy ? ' is-busy' : ''}`} />
       </span>
     </p>
   )

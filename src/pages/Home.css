@@ -43,20 +43,17 @@
 }
 
 .hero__tagline {
-  --tracking: -0.01em;
-  --cursor-width: 0.6em;
-  --cursor-gap: 0.25em;
   margin-top: clamp(28px, 4vw, 44px);
   font-size: clamp(17px, 2.3vw, 24px);
   font-weight: 600;
-  letter-spacing: var(--tracking);
+  letter-spacing: -0.01em;
 }
 
 .hero__cursor {
   display: inline-block;
-  width: var(--cursor-width);
+  width: 0.6em;
   height: 1.1em;
-  margin-left: var(--cursor-gap);
+  margin-left: 0.25em;
   background: var(--accent);
   vertical-align: text-bottom;
   animation: blink 1.1s steps(1, end) infinite;
@@ -65,19 +62,6 @@
 /* Like a real terminal, the cursor stays solid while letters go in or out. */
 .hero__cursor.is-busy {
   animation: none;
-}
-
-/*
- * Exactly as wide as the whole current role plus the cursor, so the finished line is centered
- * and "I am" stays put while letters go in or out. Between roles, while the line is empty,
- * the width eases to the next role's, and "I am" slides to its new spot.
- */
-.hero__typed {
-  display: inline-block;
-  width: calc(var(--chars) * (1ch + var(--tracking)) + var(--cursor-gap) + var(--cursor-width));
-  text-align: left;
-  white-space: nowrap;
-  transition: width 0.35s ease-out;
 }
 
 .hero__lead {

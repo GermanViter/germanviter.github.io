@@ -8,8 +8,6 @@ const HOLD_MS = 2000
 const DELETE_MS = 40
 
 interface Typewriter {
-  /** The whole current word, to size its space before it is typed out. */
-  word: string
   /** The part of the current word typed so far. */
   text: string
   /** True while letters are going in or out, so the cursor can stop blinking. */
@@ -55,7 +53,6 @@ export function useTypewriter(words: readonly string[]): Typewriter | null {
 
   if (reducedMotion) return null
   return {
-    word,
     text: word.slice(0, length),
     busy: length > 0 && (deleting || length < word.length),
   }
