@@ -117,7 +117,7 @@ const overrides: Partial<Record<string, PinOverride>> = {
     media: {
       kind: 'image',
       src: omarchyDots,
-      alt: 'Fastfetch output on Omarchy with Hyprland and Kitty',
+      alt: 'Omarchy desktop in the Shoujo Dark theme: Fastfetch, Neovim and btop tiled in Hyprland',
       fit: 'cover',
     },
   },
